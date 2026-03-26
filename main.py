@@ -59,7 +59,7 @@ with tabs[0]:
         return grouped_df
 
     def tve_extract_data(tve_df, network_list):
-        # FIXED: Cast to int regardless of whether commas are present
+        # FIX 4: Cast to int regardless of whether commas are present
         if tve_df["Net Counted Ads"].dtype == object:
             tve_df["Net Counted Ads"] = tve_df["Net Counted Ads"].str.replace(",", "")
         tve_df["Net Counted Ads"] = tve_df["Net Counted Ads"].astype(int)
@@ -79,7 +79,7 @@ with tabs[0]:
     def read_uploaded_file(uploaded_file):
         """Read a CSV or Excel uploaded file, handling metadata rows gracefully."""
         file_name = uploaded_file.name
-        # FIXED: Wrap initial read in try/except; always seek(0) before each attempt
+        # FIX 2 & 3: Wrap initial read in try/except; always seek(0) before each attempt
         uploaded_file.seek(0)
         try:
             if file_name.endswith(".csv"):
@@ -196,14 +196,14 @@ with tabs[1]:
                 st.warning("⚠️ Please upload at least one file.")
                 return
 
-            # FIXED: Move output and download button inside the else (files exist) path
+            # FIX 5 & 6: Move output and download button inside the else (files exist) path
             data_by_keyword = {key: [] for key in KEYWORDS}
 
             for uploaded_file in uploaded_files:
                 file_name = uploaded_file.name
                 st.write(f"🔍 Processing file: `{file_name}`")
 
-                # FIXED: Consistent seek + try/except for initial read
+                # FIX 2 & 3: Consistent seek + try/except for initial read
                 uploaded_file.seek(0)
                 try:
                     if file_name.endswith(".csv"):
@@ -240,14 +240,15 @@ with tabs[1]:
                             cols = [c for c in ["Television Network Name", "Net Counted Ads", "Video Ads 100% Complete"] if c in df.columns]
                             df = df[cols] if cols else df
 
-                        # FIXED: Added "Reach-Frequency" and "Unique RF" to sum-tracking condition
                         if key in ["VOD", "TVE", "LSA", "Delivery", "Reach-Frequency", "Unique RF", "Daily", "Hourly", "Creative", "Geo"]:
-                            sum_net_count_ads = df["Net Counted Ads"].sum()
-                            new_row = {
-                                "Tab Name": key,
-                                "Sum Of Net Count Ads": sum_net_count_ads
-                            }
-                            table_df = pd.concat([table_df, pd.DataFrame([new_row])], ignore_index=True)
+                            # Only sum Net Counted Ads if the column actually exists in this file
+                            if "Net Counted Ads" in df.columns:
+                                sum_net_count_ads = df["Net Counted Ads"].sum()
+                                new_row = {
+                                    "Tab Name": key,
+                                    "Sum Of Net Count Ads": sum_net_count_ads
+                                }
+                                table_df = pd.concat([table_df, pd.DataFrame([new_row])], ignore_index=True)
 
                         data_by_keyword[key].append(df)
                         matched = True
@@ -276,7 +277,7 @@ with tabs[1]:
                         combined_df = pd.concat(dfs, ignore_index=True)
                         combined_df.to_excel(writer, sheet_name=key[:31], index=False)
 
-            # FIXED: Download button now correctly inside the files-exist path
+            # FIX 5 & 6: Download button now correctly inside the files-exist path
             st.download_button(
                 label="⬇️ Download Combined Excel",
                 data=output.getvalue(),
