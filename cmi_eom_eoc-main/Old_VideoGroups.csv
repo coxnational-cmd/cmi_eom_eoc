@@ -1,6 +1,6 @@
 A+E
 Acorn TV
-Adult Swim
+Adultswim
 AMC
 American Heroes
 Animal Planet
@@ -40,7 +40,7 @@ Freeform
 FX
 FXM
 FXX
-FYI
+FYI Channel
 Golf Channel
 Hallmark
 HGTV
@@ -53,7 +53,7 @@ Lifetime Movie Network
 Logo
 Magnolia Network
 Military History
-MotorTrend
+Motor Trend
 MSNBC
 MTV
 MTV Live
@@ -92,14 +92,6 @@ VH1
 VH1 Classic
 Viceland
 WE
-Discovery En Espanol
-Discovery Familia
-Discovery Family
-Magnolia Network
-HLN
-TUDN
-Galavision
-UNIMAS
 FF_STB VOD: AETN: AE
 FF_STB VOD: AETN: FYI
 FF_STB VOD: AETN: History
@@ -138,7 +130,7 @@ FF_STB VOD: Turner: CNN
 FF_STB VOD: Turner: TBS
 FF_STB VOD: Turner: TNT
 FF_STB VOD: Turner: TruTV
-FF_STB VOD: Univision: Univision
+FF_STB VOD: Univision
 FF_STB VOD: Viacom: CMT
 FF_STB VOD: Viacom: Comedy Central
 FF_STB VOD: Viacom: MTV
@@ -146,11 +138,3 @@ FF_STB VOD: Viacom: MTV2
 FF_STB VOD: Viacom: Paramount
 FF_STB VOD: Viacom: TV Land
 FF_STB VOD: Viacom: VH1
-FF_STB VOD: Univision: UNIMAS
-FF_STB VOD: Univision: Galavision
-FF_STB VOD: Univision: TUDN
-FF_STB VOD: Turner: HLN
-FF_STB VOD: DISC: Discovery En Espanol
-FF_STB VOD: DISC: Discovery Familia
-FF_STB VOD: DISC: Discovery Family
-FF_STB VOD: DISC: Magnolia Network
